@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import StripeElementsProvider from "@/components/StripeElementsProvider";
 
 const poppinsRegular = localFont({
   src: "../public/fonts/Poppins-Regular.ttf",
@@ -42,7 +43,7 @@ export default function RootLayout({
       <body
         className={`${poppinsRegular.variable} ${poppinsMedium.variable} ${poppinsSemiBold.variable}`}
       >
-        {children}
+        <StripeElementsProvider>{children}</StripeElementsProvider>
       </body>
     </html>
   );

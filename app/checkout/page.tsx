@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useCartStore } from "@/store/cartStore";
+import { CartItem, useCartStore } from "@/store/cartStore";
 import Divider from "@/components/Divider";
 
 interface Toast {
@@ -70,6 +70,39 @@ export default function CheckoutPage() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const transformToStripeLineItems = (items: CartItem[]) => {
+    return items.map((item) => ({
+      price_data: {
+        currency: "sgd",
+        product_data: {
+          name: item.name,
+        },
+        unit_amount: item.price * 100,
+      },
+      quantity: item.quantity,
+    }));
+  };
+
+  const handleStripePayment = async () => {
+    try {
+      const lineItems = transformToStripeLineItems(items);
+      const res = await fetch("/api/payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ lineItems }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to create payment intent");
+      }
+
+      router.push(data.redirectUrl);
+    } catch (err: any) {
+      addToast("error", err.message || "Unexpected error");
+    }
+  };
+
   const handleMakePayment = async () => {
     setIsSubmitted(true);
     if (validateForm()) {
@@ -78,8 +111,7 @@ export default function CheckoutPage() {
         // Create a hidden form to submit to Google Apps Script
         const form = document.createElement("form");
         form.method = "POST";
-        form.action =
-          "https://script.google.com/macros/s/AKfycbxMjIO9GQHob3PaEbYtfRtwckryP0EY3W3v-xoWUP8QGoBsuMurVd3gzTm_3e1O8-Tedg/exec";
+        form.action = process.env.NEXT_PUBLIC_GOOGLE_DOCS_SCRIPT_URL ?? "";
         form.target = "hidden-iframe";
         form.style.display = "none";
 
@@ -112,9 +144,8 @@ export default function CheckoutPage() {
           document.body.removeChild(iframe);
         }, 1000);
 
-        addToast("success", "Order submitted successfully!");
+        await handleStripePayment();
       } catch (error) {
-        console.error("Error submitting data:", error);
         addToast("error", "Error submitting order. Please try again.");
       } finally {
         setIsSubmitting(false);
@@ -317,8 +348,8 @@ export default function CheckoutPage() {
               disabled={!isFormValid() || isSubmitting}
               className={`px-6 py-3 rounded-md transition-all flex items-center space-x-2 ${
                 isFormValid() && !isSubmitting
-                  ? "bg-green-200 hover:bg-green-800 text-white cursor-pointer"
-                  : "bg-gray-300 text-gray-500 cursor-not-allowed opacity-50"
+                  ? "bg-green-100 hover:bg-green-800 text-white cursor-pointer"
+                  : "bg-green-100 text-white cursor-not-allowed opacity-40"
               }`}
             >
               <span>{isSubmitting ? "Submitting..." : "Make Payment"}</span>

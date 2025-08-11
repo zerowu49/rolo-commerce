@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Product } from "@/types/product";
 
-interface CartItem extends Product {
+export interface CartItem extends Product {
   variant?: string;
   quantity: number;
 }

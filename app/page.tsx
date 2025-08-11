@@ -149,7 +149,7 @@ export default function Home() {
 
       <main className="px-10 py-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-8 text-left">
-          Machine & Equipments
+          Breville
         </h1>
 
         <ProductGrid products={filteredProducts} />

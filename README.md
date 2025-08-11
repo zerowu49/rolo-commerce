@@ -10,17 +10,29 @@ A modern, responsive e-commerce website built with Next.js 14, TypeScript, and T
 - 📱 **Responsive design** for all devices
 - 🔍 **Search functionality** for products
 - 🛒 **Shopping cart** system
-- ⚡ **Fast performance** with modern React patterns
 
 ## Screenshots
 
-The website features:
+- Overall Catalog Screen:
+  ![Overall Catalog Screenshot](screenshots/Overall%20Catalogue.jpeg)
 
-- Clean header with ROLO branding
-- Search bar with real-time filtering
-- Product grid displaying Breville coffee machines
-- Responsive design that works on all screen sizes
-- Modern UI with hover effects and transitions
+- Search Results:
+  ![Search Results Screenshot](screenshots/Search%20Results.jpeg)
+
+- Product Detail:
+  ![Product Detail Screenshot](screenshots/Product%20Detail.jpeg)
+
+- Cart:
+  ![Cart Screenshot](screenshots/Cart.jpeg)
+
+- Customer Details:
+  ![Customer Details Screenshot](screenshots/Customer%20Details.jpeg)
+
+- Stripe Checkout:
+  ![Stripe Checkout Screenshot](screenshots/Checkout%20Stripe.jpeg)
+
+- Success Checkout:
+  ![Success Page Screenshot](screenshots/Success.jpeg)
 
 ## Getting Started
 
@@ -65,11 +77,7 @@ rolo-commerce/
 │   ├── layout.tsx         # Root layout component
 │   └── page.tsx           # Home page component
 ├── components/             # React components
-│   ├── Header.tsx         # Header with search and cart
-│   ├── ProductGrid.tsx    # Product grid layout
-│   └── ProductCard.tsx    # Individual product card
 ├── types/                  # TypeScript type definitions
-│   └── product.ts         # Product interface
 ├── package.json            # Dependencies and scripts
 ├── tailwind.config.js      # Tailwind CSS configuration
 ├── tsconfig.json          # TypeScript configuration
@@ -89,55 +97,4 @@ rolo-commerce/
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React
-- **State Management**: React useState
-- **Build Tool**: Next.js built-in bundler
-
-## Customization
-
-### Adding New Products
-
-Edit the `products` array in `app/page.tsx`:
-
-```typescript
-const products: Product[] = [
-  {
-    id: 5,
-    name: "New Product",
-    price: 299,
-    description: "Product description",
-    image: "/images/new-product.jpg",
-    category: "Category",
-  },
-];
-```
-
-### Styling
-
-Modify `tailwind.config.js` to customize colors, fonts, and other design tokens.
-
-### Components
-
-All components are modular and can be easily modified in the `components/` directory.
-
-## Deployment
-
-This project can be deployed to:
-
-- Vercel (recommended for Next.js)
-- Netlify
-- Any static hosting service
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## Support
-
-For support or questions, please open an issue in the repository.
+- **State Management**: React useState & zustand
