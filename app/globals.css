@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: var(--font-poppins-regular), system-ui, sans-serif;
+    }
+
+    body {
+        font-family: var(--font-poppins-regular), system-ui, sans-serif;
+        font-weight: 400;
+    }
+
+    /* Poppins Font Family */
+    .font-poppins-regular {
+        font-family: var(--font-poppins-regular), system-ui, sans-serif;
+        font-weight: 400;
+    }
+
+    .font-poppins-medium {
+        font-family: var(--font-poppins-medium), system-ui, sans-serif;
+        font-weight: 500;
+    }
+
+    .font-poppins-semibold {
+        font-family: var(--font-poppins-semibold), system-ui, sans-serif;
+        font-weight: 600;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors;
+    }
+
+    .btn-secondary {
+        @apply bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors;
+    }
+
+    .btn-secondary:disabled {
+        @apply bg-gray-100 text-gray-400 cursor-not-allowed;
+    }
+
+    .btn-secondary:disabled:hover {
+        @apply bg-gray-100;
+    }
+}
