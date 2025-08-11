@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CheckCircle } from "lucide-react";
+import { apiURLPaths } from "@/lib/constant";
 
 export default function SuccessPage() {
   const router = useRouter();
@@ -13,10 +14,13 @@ export default function SuccessPage() {
 
   const hitStripeAPI = async () => {
     try {
-      const res = await fetch("/api/checkout-session?session_id=" + sessionId, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
+      const res = await fetch(
+        apiURLPaths.checkoutSession + "?session_id=" + sessionId,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) {

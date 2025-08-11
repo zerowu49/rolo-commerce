@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
-import { products } from "@/app/page";
+import { products } from "@/lib/constant";
 import Header from "@/components/Header";
 import Divider from "@/components/Divider";
 

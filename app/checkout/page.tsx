@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { CartItem, useCartStore } from "@/store/cartStore";
 import Divider from "@/components/Divider";
+import { apiURLPaths } from "@/lib/constant";
 
 interface Toast {
   id: string;
@@ -86,7 +87,7 @@ export default function CheckoutPage() {
   const handleStripePayment = async () => {
     try {
       const lineItems = transformToStripeLineItems(items);
-      const res = await fetch("/api/payment", {
+      const res = await fetch(apiURLPaths.payment, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ lineItems }),
